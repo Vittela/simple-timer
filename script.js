@@ -1,41 +1,13 @@
-function Clock(seconds, minutes, hours) {
-  this.seconds = seconds;
-  this.minutes = minutes;
-  this.hours = hours;
+function derivateTimes(time) {
+  let hours = Math.trunc((time / 3600));
+  let minutes = Math.trunc((time % 3600) / 60);
+  let seconds = (time % 3600) % 60;
+
+  if (`${hours}`.length === 1) { hours = `0${hours}` };
+  if (`${minutes}`.length === 1) { minutes = `0${minutes}` };
+  if (`${seconds}`.length === 1) { seconds = `0${seconds}` };
+
+  return (`${hours}:${minutes}:${seconds}`)
 }
 
-function configurateTime(time) {
-  if (time.seconds >= 60) {
-    time.seconds -= 60;
-    time.minutes += 1;
-  }
-  else if (time.minutes >= 60) {
-    time.minutes -= 60;
-    time.hours += 1;
-  }
-
-  else if (time.minutes >= 0) {
-    if (time.seconds <= 0) {
-      time.seconds += 60;
-      time.minutes -= 1;
-    }
-  }
-
-  else if (time.hours >= 0) {
-    if (time.minutes <= 0) {
-      time.minutes += 60;
-      time.hours -= 1;
-    }
-  }
-}
-
-const clock_1 = new Clock(3, 1, 2)
-const counter = setInterval(countdown, 1000)
-
-function countdown() {
-  configurateTime(clock_1)
-  clock_1.seconds -= 1;
-
-  if (clock_1.seconds <= 0 && clock_1.minutes <= 0 && clock_1.hours <= 0) { clearInterval(counter) }
-  console.log(clock_1)
-}
+console.log(derivateTimes(432125))
