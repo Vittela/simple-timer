@@ -1,11 +1,18 @@
+// Interface variables
 const timerDisplay = document.getElementById("timer-display");
+const buttonToggle = document.getElementById("toggle");
+const buttonStop = document.getElementById("stop");
 
-let totalSeconds = 0;
+// Logic variables
+let totalSeconds = 40;
 let initialTime = totalSeconds;
 let timer = null;
 let counting = false;
-timerDisplay.innerHTML = formatTime(totalSeconds)
 
+// Interface settings
+timerDisplay.innerHTML = formatTime(totalSeconds);
+buttonToggle.addEventListener("click", toggleCountdown);
+buttonStop.addEventListener("click", StopCountdown);
 
 // Timer functions
 
@@ -20,23 +27,19 @@ function definateTime(hours, minutes, seconds) {
   return (`New time: ${hours}:${minutes}:${seconds}`);
 }
 
-function startCountdown() {
-  counting = true;
+function toggleCountdown() {
+  if (counting === false) { counting = true; }
+  else { counting = false }
   updateTime();
+  updateInterface();
 
-  return ("Countdown started");
+  return ("Countdown toggled");
 }
 
-function pauseCountdown() {
+function StopCountdown() {
   counting = false;
   updateTime();
-
-  return ("Countdown paused");
-}
-
-function resetCountdown() {
-  counting = false;
-  updateTime();
+  updateInterface();
 
   totalSeconds = initialTime;
   timerDisplay.innerHTML = formatTime(totalSeconds);
@@ -48,10 +51,29 @@ function resetCountdown() {
 
 function updateTime() {
   if (counting === true) {
+    if (timer !== null) return;
     timer = setInterval(countdown, 1000);
   } else {
     clearInterval(timer);
     timer = null;
+  }
+}
+
+function updateInterface() {
+  // Aria Label
+  if (counting === true) {
+    buttonToggle.ariaLabel = "Pause"
+    buttonToggle.innerHTML = `
+<svg width="32" height="32" viewBox="0 0 24 24">
+  <rect x="6" y="5" width="4" height="14" fill="#1466E0"/>
+  <rect x="14" y="5" width="4" height="14" fill="#1466E0"/>
+</svg>`
+  } else {
+    buttonToggle.ariaLabel = "Start"
+    buttonToggle.innerHTML = `
+<svg width="30" height="30" viewBox="0 0 24 24">
+  <path d="M8 5v14l11-7z" fill="#1466E0"/>
+</svg>`
   }
 }
 
