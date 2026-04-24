@@ -1,9 +1,10 @@
-let display = document.getElementById("timer-display");
+const timerDisplay = document.getElementById("timer-display");
+
 let totalSeconds = 0;
 let initialTime = totalSeconds;
 let timer = null;
 let counting = false;
-display.innerHTML = formatTime(totalSeconds)
+timerDisplay.innerHTML = formatTime(totalSeconds)
 
 
 // Timer functions
@@ -14,7 +15,7 @@ function definateTime(hours, minutes, seconds) {
 
   totalSeconds = derivateSeconds(hours, minutes, seconds);
   initialTime = totalSeconds;
-  display.innerHTML = formatTime(totalSeconds);
+  timerDisplay.innerHTML = formatTime(totalSeconds);
 
   return (`New time: ${hours}:${minutes}:${seconds}`);
 }
@@ -38,7 +39,7 @@ function resetCountdown() {
   updateTime();
 
   totalSeconds = initialTime;
-  display.innerHTML = formatTime(totalSeconds);
+  timerDisplay.innerHTML = formatTime(totalSeconds);
 
   return ("Countdown restarted");
 }
@@ -56,7 +57,7 @@ function updateTime() {
 
 function countdown() {
   console.log(formatTime(totalSeconds));
-  display.innerHTML = formatTime(totalSeconds);
+  timerDisplay.innerHTML = formatTime(totalSeconds);
   totalSeconds -= 1;
 
   if (totalSeconds < 1) { clearInterval(timer) };
