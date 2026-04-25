@@ -124,9 +124,8 @@ function updateTime() {
 // Logic functions
 
 function countdown() {
-  console.log(formatTime(totalSeconds))
-  timerDisplay.innerHTML = formatTime(totalSeconds);
   totalSeconds -= 1;
+  timerDisplay.innerHTML = formatTime(totalSeconds);
 
   if (totalSeconds < 0) { clearInterval(timer) };
 }
