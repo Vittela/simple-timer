@@ -14,6 +14,14 @@
     <main class="timer-card">
       <p id="timer-display" class="timer-display">00:00:00</p>
 
+      <div id="time-editor" class="time-editor" style="display: none;">
+        <input type="number" id="input-hours" min="0" max="99" value="00">
+        :
+        <input type="number" id="input-minutes" min="0" max="59" value="00">
+        :
+        <input type="number" id="input-seconds" min="0" max="59" value="00">
+      </div>
+
       <div class="controls">
         <div class="controls">
           <button class="control-btn" id="toggle" aria-label="Start">
