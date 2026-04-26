@@ -127,7 +127,7 @@ function countdown() {
   totalSeconds -= 1;
   timerDisplay.innerHTML = formatTime(totalSeconds);
 
-  if (totalSeconds < 0) { clearInterval(timer) };
+  if (totalSeconds <= 0) { clearInterval(timer) };
 }
 
 function formatTime(timeInSeconds) {
